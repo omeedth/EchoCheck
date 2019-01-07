@@ -1,0 +1,627 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="">
+
+    <title>Dashboard Template for Bootstrap</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="dashboard.css" rel="stylesheet">
+  </head>
+
+  <body>
+
+    <style>
+
+      #text_area_container {
+        width: 100%;
+        /* border: 1px solid red; */
+      }
+
+      .txt {
+        width: 100%;
+        height: 100%;
+        resize: none;
+        font-size: 16px;
+      }
+
+      .txt_container {
+        width: 80%;
+        height: 250px;
+        margin: auto;
+      }
+
+      .btn_ctn {
+        width: 120px;
+        margin: 15px auto;
+      }
+
+      .diction {
+        margin: 0 auto;
+      }
+
+      .table-wrapper-scroll-y {
+        display: block;
+        max-height: 250px;
+        overflow-y: auto;
+        -ms-overflow-style: -ms-autohiding-scrollbar;
+      }
+
+    </style>
+
+    <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
+      <a class="navbar-brand col-sm-3 col-md-2 mr-0 text-center" href="#">EchoCheck</a>
+      <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
+      <ul class="navbar-nav px-3">
+        <li class="nav-item text-nowrap">
+          <a class="nav-link" href="#">Sign out</a>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+          <div class="sidebar-sticky">
+            <ul class="nav flex-column">
+              <li class="nav-item">
+                <a class="nav-link active" href="#">
+                  <span data-feather="home"></span>
+                  Dashboard <span class="sr-only">(current)</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+                  <span data-feather="file"></span>
+                  Orders
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+                  <span data-feather="shopping-cart"></span>
+                  Products
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+                  <span data-feather="users"></span>
+                  Customers
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+                  <span data-feather="bar-chart-2"></span>
+                  Reports
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+                  <span data-feather="layers"></span>
+                  Integrations
+                </a>
+              </li>
+            </ul>
+
+            <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+              <span>Saved reports</span>
+              <a class="d-flex align-items-center text-muted" href="#">
+                <span data-feather="plus-circle"></span>
+              </a>
+            </h6>
+            <ul class="nav flex-column mb-2">
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+                  <span data-feather="file-text"></span>
+                  Current month
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+                  <span data-feather="file-text"></span>
+                  Last quarter
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+                  <span data-feather="file-text"></span>
+                  Social engagement
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+                  <span data-feather="file-text"></span>
+                  Year-end sale
+                </a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+          <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+            <h1 class="h2">Dashboard</h1>
+            <div class="btn-toolbar mb-2 mb-md-0">
+              <div class="btn-group mr-2">
+                <button class="btn btn-sm btn-outline-secondary">Share</button>
+                <button class="btn btn-sm btn-outline-secondary">Export</button>
+              </div>
+              <button class="btn btn-sm btn-outline-secondary dropdown-toggle">
+                <span data-feather="calendar"></span>
+                This week
+              </button>
+            </div>
+          </div>
+
+
+
+          <!-- <canvas class="my-4" id="myChart" width="900" height="380"></canvas> -->
+
+          <div id="graph_container">
+            <h2 id="graph_title"></h2>
+            <canvas id="pieChart"></canvas>
+          </div>
+
+          <h2>Text</h2>
+          <div class="table-responsive">
+
+            <div class="table-wrapper-scroll-y">
+
+              <table id="wordtable" class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">Echoes</th> <!-- Number of repetitions -->
+                    <th scope="col">Word</th> <!-- The Word -->
+                    <th scope="col">Type</th> <!-- Noun/Adjective/Verb/Adverb/Unknown -->
+                    <!-- <th scope="col">Handle</th> -->
+                  </tr>
+                </thead>
+                <tbody id="wordchart">
+                  <!-- <tr>
+                    <th scope="row">1</th>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">2</th>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>@fat</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">3</th>
+                    <td>Larry</td>
+                    <td>the Bird</td>
+                    <td>@twitter</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">4</th>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">5</th>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>@fat</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">6</th>
+                    <td>Larry</td>
+                    <td>the Bird</td>
+                    <td>@twitter</td>
+                  </tr> -->
+                </tbody>
+              </table>
+
+            </div>
+
+            <h2>Text Box</h2>
+
+            <div id="text_area_container">
+
+              <div class="txt_container">
+                <textarea class="txt"></textarea>
+              </div>
+
+              <div class="btn_ctn">
+                <button class="diction" onclick="analyze()">
+                  Make Dictionary
+                </button>
+              </div>
+
+          </div>
+
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="jquery-slim.min.js"><\/script>')</script>
+    <script src="popper.min.js"></script>
+    <script src="bootstrap.min.js"></script>
+
+    <!-- Icons -->
+    <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
+    <script>
+      feather.replace()
+    </script>
+
+    <!-- Graphs -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+
+    <!-- Scatter -->
+    <!-- <script>
+      var ctx = document.getElementById("myChart");
+      var myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+          datasets: [{
+            data: [15339, 21345, 18483, 24003, 23489, 24092, 12034],
+            lineTension: 0,
+            backgroundColor: 'transparent',
+            borderColor: '#007bff',
+            borderWidth: 4,
+            pointBackgroundColor: '#007bff'
+          }]
+        },
+        options: {
+          scales: {
+            yAxes: [{
+              ticks: {
+                beginAtZero: false
+              }
+            }]
+          },
+          legend: {
+            display: false,
+          }
+        }
+      });
+    </script> -->
+
+    <script>
+
+      function Comparator(a, b) {
+       if (a[0] < b[0]) return -1;
+       if (a[0] > b[0]) return 1;
+       return 0;
+      }
+
+      function makeChart(data_vals,max) {
+        resetCanvas();
+
+        // var test1 = ['8','6','3','2','10','14'];
+        // var test2 = [8,6,3,2,10,14];
+        // test2 = test2.map(x => parseInt(x));
+        //
+        // test1.sort((x,y) => x - y);
+        // test2.sort((x,y) => y - x);
+        //
+        // console.log(test1);
+        // console.log(test2);
+
+        a = Object.values(data_vals);
+        // a = a.map(x => parseInt(x));
+
+        b = Object.keys(data_vals);
+
+        // a.sort((x,y) => y - x);
+        // a.reverse();
+
+        // console.log(a);
+
+        sorted = a.map(function(e, i) {
+          return [e, b[i]];
+        });
+
+        // (x,y) => y - x
+        sorted.sort(Comparator);
+        sorted.reverse();
+
+        // console.log(sorted);
+
+        final_zip = sorted.slice(0,max);
+
+        // console.log(final_zip);
+
+        fa = final_zip.map(x => x[0]);
+
+        fb = final_zip.map(x => x[1]);
+
+        // console.log(fa);
+        // console.log(fb);
+
+        // data = Object.keys(data_vals);
+        // vals = Object.values(data_vals);
+        //
+        // len = data.length;
+
+        var ctx = document.getElementById("pieChart");
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: fb, // We want this to be all of the words we have X-Axis
+                datasets: [{
+                    label: '# of echoes',
+                    data: fa,      // Frequencies of Words Y-Axis
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)',
+                        //
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255,99,132,1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)',
+                        //
+                        'rgba(255,99,132,1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero:true,
+                            callback: function(value) {if (value % 1 === 0) {return value;}}
+                        }
+                    }]
+                }
+            }
+        });
+      }
+
+      //pie
+      // var ctxP = document.getElementById("pieChart").getContext('2d');
+      // var myPieChart = new Chart(ctxP, {
+      //   type: 'pie',
+      //   data: {
+      //     labels: ["Red", "Green", "Yellow", "Grey", "Dark Grey"],
+      //     datasets: [{
+      //       data: [300, 50, 100, 40, 120],
+      //       backgroundColor: ["#F7464A", "#46BFBD", "#FDB45C", "#949FB1", "#4D5360"],
+      //       hoverBackgroundColor: ["#FF5A5E", "#5AD3D1", "#FFC870", "#A8B3C5", "#616774"]
+      //     }]
+      //   },
+      //   options: {
+      //     responsive: true
+      //   }
+      // });
+
+      var resetCanvas = function(){
+        $('#pieChart').remove(); // this is my <canvas> element
+        $('#graph_container').append('<canvas id="pieChart"><canvas>');
+        canvas = document.querySelector('#pieChart');
+        ctx = canvas.getContext('2d');
+        // ctx.canvas.width = $('#graph').width(); // resize to parent width
+        // ctx.canvas.height = $('#graph').height(); // resize to parent height
+        // var x = canvas.width/2;
+        // var y = canvas.height/2;
+        // ctx.font = '10pt Verdana';
+        // ctx.textAlign = 'center';
+        // ctx.fillText('This text is centered on the canvas', x, y);
+      };
+
+      // function pie(t_row) {
+      //   // console.log(t_row);
+      //   resetCanvas();
+      //   t_data = t_row.getElementsByTagName("td");
+      //   graph_title.innerHTML = t_data[0].innerHTML;
+      //   var Mport = parseInt(t_data[2].innerHTML);
+      //   var Mname = parseInt(t_data[3].innerHTML);
+      //   var prop = parseInt(t_data[1].innerHTML) - (Mport + Mname);
+      //
+      //   var ctxP = document.getElementById("pieChart").getContext('2d');
+      //   var myPieChart = new Chart(ctxP, {
+      //     type: 'pie',
+      //     data: {
+      //       labels: ["Proper", "Misportrayal", "Misnamed"],
+      //       datasets: [{
+      //         data: [prop, Mport, Mname],
+      //         backgroundColor: ["#F7464A", "#46BFBD", "#FDB45C"],
+      //         hoverBackgroundColor: ["#FF5A5E", "#5AD3D1", "#FFC870"]
+      //       }]
+      //     },
+      //     options: {
+      //       responsive: true
+      //     }
+      //   });
+      // }
+
+    </script>
+
+    <!-- Testing Purposes -->
+    <script>
+
+    function getRandomInt(min,max) {
+      return Math.floor(Math.random() * (max - min) + min);
+    }
+
+    function randomizeData(td,min,max) {
+      td.innerHTML = getRandomInt(min,max);
+    }
+
+    </script>
+    <!-- Above are all testing methods -->
+
+    <!-- Cycling through grids -->
+    <!-- I wrote this code in hopes it helps you input the data -->
+    <script>
+
+      // var websites = document.getElementsByClassName("Website");
+      // var len = websites.length;
+      //
+      // for(var i = 0; i < len; i++) {
+      //   children = websites[i].getElementsByTagName("td");
+      //
+      //   // Testing Purposes
+      //   randomizeData(children[1],1000,5000);
+      //   randomizeData(children[2],50,400);
+      //   randomizeData(children[3],100,600);
+      //
+      //   // Variables
+      //   web_name = children[0].innerHTML;
+      //   velcro_prod = parseInt(children[1].innerHTML);
+      //   misportrayals = parseInt(children[2].innerHTML);
+      //   misnamings = parseInt(children[3].innerHTML);
+      //   infringements = parseInt(children[4].innerHTML);
+      //
+      //   children[4].innerHTML = misportrayals + misnamings;
+      // }
+
+      //pie(websites[0]);
+
+      //document.getElementById("data-table").addEventListener("click",graph);
+
+      function graph(evt) {
+        var t = evt.target;
+        var p = t.parentNode;
+        // console.log("target: " + evt.target);
+        if(p.classList.contains("Website")) {
+          // console.log("clicked on row")
+          pie(p);
+        }
+      }
+
+    </script>
+
+    <script>
+
+      function checkWord(word) {
+          return word.length >= 2;
+      }
+
+      function separateWords() {
+        delimiter = /[^A-Za-z]/;///[ \.,-\/#!$%\^&\*;:{}=\-_`~()]+/;//"/,?\s+/"; [\.,-\/#!$%\^&\*;:{}=\-_`~()]
+        textar = document.getElementsByClassName("txt")[0];
+        sentence = textar.value;
+        sentence = sentence.trim();
+        sentence = sentence.toLowerCase();
+        words = sentence.split(delimiter).filter(checkWord);
+        return words;
+        //wordss = words.filter(true);
+        // console.log(sentence);
+        // console.log(words);
+      }
+
+      function makeDictionary(words) {
+        result = { };
+        for(var i = 0; i < words.length; ++i) {
+            if(!result[words[i]])
+                result[words[i]] = 0;
+            ++result[words[i]];
+        }
+        return result;
+      }
+
+      function analyze() {
+        words = separateWords(); // Keys
+        d = makeDictionary(words);
+        // vals = Object.values(d);
+
+        a = Object.values(d);
+        b = Object.keys(d);
+
+        sorted = a.map(function(e, i) {
+          return [e, b[i]];
+        });
+
+        // (x,y) => y - x
+        sorted.sort(Comparator);
+        sorted.reverse();
+
+        //console.log(vals);      // Frequencies
+        fillTable(sorted);
+        makeChart(d,10);
+        //console.log(d);
+      }
+
+      makeChart({});
+
+      function fillTable(data) {
+
+        len = data.length;
+
+        // console.log(data);
+
+        var table = document.getElementById("wordtable");
+        document.getElementById("wordchart").remove();
+
+        var tbody = document.createElement("tbody");
+        tbody.setAttribute('id','wordchart');
+        table.appendChild(tbody);
+
+        //for (const [key, value] of Object.entries(data)) {
+        for(var i = 0; i < len; i++) {
+          // console.log(key, value);
+          // <tr>
+          //   <th scope="row">4</th>
+          //   <td>Mark</td>
+          //   <td>Otto</td>
+          //   <td>@mdo</td>
+          // </tr>
+
+          pair = sorted[i];
+
+          var tr = document.createElement('tr');
+          var th = document.createElement('th');
+
+          // Echoes
+          th.setAttribute('scope','row');
+          th.innerHTML = pair[0]; //value;
+
+          tr.appendChild(th);
+
+          // Word
+          td = document.createElement('td');
+          td.innerHTML = pair[1]; //key;
+
+          tr.appendChild(td);
+
+          // Type
+          td = document.createElement('td');
+          td.innerHTML = 'Unknown'
+
+          tr.appendChild(td);
+
+          tbody.appendChild(tr);
+        }
+
+      }
+
+    </script>
+
+  </body>
+</html>
